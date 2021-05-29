@@ -1,5 +1,5 @@
 {
-  "name": "multiroom_chat",
+  "name": "mmorpg_got",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -13,7 +13,8 @@
     "consign": "^0.1.2",
     "ejs": "^2.5.2",
     "express": "^4.14.0",
+    "express-session": "^1.17.2",
     "express-validator": "^2.20.8",
-    "mongodb": "^3.6.9"
+    "mongodb": "^2.2.9"
   }
 }
