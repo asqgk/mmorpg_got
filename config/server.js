@@ -10,6 +10,7 @@ var bodyParser = require('body-parser');
 /* importar o módulo do express-validator */
 var expressValidator = require('express-validator');
 
+/* importar o módulo do express-session para geração dos cookies*/
 var expressSession = require('express-session');
 
 /* iniciar o objeto do express */
@@ -28,8 +29,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 /* configurar o middleware express-validator */
 app.use(expressValidator());
 
+app.disable('x-powered-by');
+
+/* configurar o middleware express-session */
 app.use(expressSession({
-	secret: 'hiweufhwuiehuifwh',
+	secret: 'ahjkfuweuihsiudfokrj',
 	resave: false,
 	saveUninitialized: false
 }));
