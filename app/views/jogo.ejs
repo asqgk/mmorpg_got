@@ -19,7 +19,48 @@
 				$('#btn_sair').click(function(){
 					window.location.href = '/sair';
 				})
+
+				$('#btn_suditos').click(function(){
+					$('#msg').hide()
+					$.ajax({
+						url: '/suditos',
+						method: "get",
+						success: function(data){
+							$('#acoes').html(data);
+						}
+					})
+				})
+
+				$('#btn_pergaminho').click(function(){
+					// alert('BTN pergaminho clicado')
+					$('#msg').hide()
+					
+					$.ajax({
+						url: '/pergaminhos',
+						method: "get",
+						success: function(data){
+							$('#acoes').html(data);
+
+							clearTimeout(timerId);
+							cronometro();
+						}
+					})
+				})
 			})
+
+			let timerId = null;
+
+			function cronometro(){
+
+				$('.tempo_restante').each(function(){
+					const segundos = $(this).html();
+					const segundos_atuais = parseInt(segundos) - 1;
+
+					$(this).html(segundos_atuais);
+				})
+
+				timerId = setTimeout('cronometro()', 1000);
+			}
 		</script>
 
 	</head>
@@ -35,6 +76,18 @@
 		</nav>
 
 	    <div class="container">
+
+			<% if(msg == 'A') { %> 
+				<div class="alert alert-danger" id="msg">
+					<strong>Operação inválida! Verifique se todos os campos foram preenchidos.</strong>
+				</div>
+			<% } %> 
+
+			<% if(msg == 'B') { %> 
+				<div class="alert alert-info" id="msg">
+					<strong>Ação realizada com sucesso!</strong>
+				</div>
+			<% } %>
 	    	
 			<div class="row">
 	    		<div class="col-sm-3 casa">
@@ -69,7 +122,7 @@
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-9">
-					<div class="acoes"></div>					
+					<div class="acoes" id="acoes">Senhor, o que deseja fazer hoje?</div>					
 				</div>
 			</div>
 			
@@ -80,12 +133,12 @@
 			
 				<div class="row">
 					<div class="col-sm-1">
-						<img src="images/outros/suditos.jpg" title="Aldeões" alt="Aldeões"/>
+						<img src="images/outros/suditos.jpg" title="Aldeões" alt="Aldeões" id="btn_suditos"/>
 						<span><%=jogo.suditos%></span>
 					</div>
 					
 					<div class="col-sm-1">
-						<img src="images/outros/pergaminho.jpg" title="Pergaminhos" alt="Pergaminhos"/>
+						<img src="images/outros/pergaminho.jpg" title="Pergaminhos" alt="Pergaminhos" id="btn_pergaminho"/>
 					</div>
 					
 					<div class="col-sm-8"></div>

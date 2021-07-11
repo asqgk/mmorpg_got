@@ -3,7 +3,6 @@ module.exports.index = function(application, req, res){
 }
 
 module.exports.autenticar = function(application, req, res){
-    
     var dadosForm = req.body;
 
     req.assert('usuario', 'O usuário não pode ser vazio').notEmpty();
